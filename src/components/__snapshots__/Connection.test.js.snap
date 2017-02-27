@@ -15,6 +15,7 @@ exports[`Setup display component rendering Renders as expected (compared to a sn
     style={
       Object {
         "color": "rgb(28, 118, 152)",
+        "fontSize": "16px",
         "marginRight": "10px",
       }
     }
@@ -36,14 +37,14 @@ exports[`Setup display component rendering Renders as expected (compared to a sn
           "backgroundColor": "lightcoral",
           "border": "1px solid black",
           "borderRadius": "50%",
-          "width": "16px",
+          "width": "20px",
         }
       }
     />
     <div
       style={
         Object {
-          "fontSize": "12px",
+          "fontSize": "14px",
           "paddingLeft": "10px",
         }
       }
@@ -66,14 +67,14 @@ exports[`Setup display component rendering Renders as expected (compared to a sn
           "backgroundColor": "lightgreen",
           "border": "1px solid black",
           "borderRadius": "50%",
-          "width": "16px",
+          "width": "20px",
         }
       }
     />
     <div
       style={
         Object {
-          "fontSize": "12px",
+          "fontSize": "14px",
           "paddingLeft": "10px",
         }
       }
@@ -99,6 +100,7 @@ exports[`Setup display component rendering Renders as expected (compared to a sn
     style={
       Object {
         "color": "rgb(28, 118, 152)",
+        "fontSize": "16px",
         "marginRight": "10px",
       }
     }

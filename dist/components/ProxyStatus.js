@@ -35,7 +35,7 @@ var ProxyStatus = function ProxyStatus(props) {
   };
 
   var proxyStatusMarkerStyle = {
-    width: '16px',
+    width: '20px',
     borderRadius: '50%',
     border: '1px solid black',
     backgroundColor: statusColour(props.status)
@@ -43,7 +43,7 @@ var ProxyStatus = function ProxyStatus(props) {
 
   var urlCombinedStyle = Object.assign({
     paddingLeft: '10px',
-    fontSize: '12px'
+    fontSize: '14px'
   }, props.urlStyle);
 
   return _react2.default.createElement(

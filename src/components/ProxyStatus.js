@@ -26,7 +26,7 @@ const ProxyStatus = (props) => {
   }
     
   const proxyStatusMarkerStyle = {
-    width: '16px',
+    width: '20px',
     borderRadius: '50%',
     border: '1px solid black',
     backgroundColor: statusColour(props.status)
@@ -35,7 +35,7 @@ const ProxyStatus = (props) => {
   const urlCombinedStyle = Object.assign(
     {
       paddingLeft: '10px',
-      fontSize: '12px'
+      fontSize: '14px'
     }, props.urlStyle)
 
   return (

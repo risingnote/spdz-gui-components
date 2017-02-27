@@ -30,6 +30,7 @@ var Connection = function Connection(props) {
   }, props.componentStyle);
 
   var combinedHeadingStyle = Object.assign({
+    fontSize: '16px',
     color: 'rgb(28, 118, 152)',
     marginRight: '10px'
   }, props.headerStyle);

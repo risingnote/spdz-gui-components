@@ -17,7 +17,21 @@ A higher order component to wrap an MPC GUI with setup functions responsible for
 - getting the SPDZ proxy config by calling the /spdzProxyConfig REST endpoint on the same URL that served the GUI
 - generating client key material, one time public key and session keys for each SPDZ Proxy.
 
-Exported as `setupWrapper`
+Function exported as `setupWrapper`.
+
+Wrapped component will receive the following properties:
+
+#### spdzProxyServerList
+
+Config supplied from REST endpoint as immutable List of Map
+
+#### spdzApiRoot
+
+The root of the path to access the spdz proxies.
+
+#### clientPublicKey
+
+A string holding a 64 char hex public key for the client.
 
 #### Props
 

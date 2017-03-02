@@ -53,7 +53,8 @@ function setupWrapper(MPCGui) {
       return (
         <MPCGui spdzProxyServerList={this.state.spdzProxyList}
                 spdzApiRoot={this.state.spdzApiRoot}
-                clientPublicKey={this.state.clientPublicKey}/>
+                clientPublicKey={this.state.clientPublicKey}
+                {...this.props}/>
       )
     }
   }

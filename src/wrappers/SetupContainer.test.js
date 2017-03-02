@@ -2,8 +2,9 @@
  * Runs full DOM rendering to allow lifecycle methods to be tested.
  */
 import React from 'react'
-import { mount } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import { List } from 'immutable'
+import renderer from 'react-test-renderer'
 
 import SetupContainer from './SetupContainer'
 
@@ -11,7 +12,7 @@ import SetupContainer from './SetupContainer'
 const ComponentUnderTest = SetupContainer(
   class Dummy extends React.Component {
     render() {
-      return <div>Dummy component not important</div>
+      return <div>Dummy component</div>
     }
   })
 
@@ -19,28 +20,35 @@ const ComponentUnderTest = SetupContainer(
 jest.mock('spdz-gui-lib')
 import { getProxyConfig, createClientPublicKey, createEncryptionKey } from 'spdz-gui-lib'
 
+beforeEach(() => {
+  getProxyConfig.mockImplementation(() => Promise.resolve(
+    {
+      "spdzApiRoot": "/spdzapi",
+      "spdzProxyList": [
+        {
+          "url": "http://spdzproxyhere:3001",
+          "publicKey": "0102030405060708010203040506070801020304050607080102030405060708"
+        },
+        {
+          "url": "http://spdzproxythere:3002",
+          "publicKey": "a1b2c3d4e5a6b7c8010203040506070801020304050607080102030405060708"
+        }
+      ]
+    }
+  ))
+  createClientPublicKey.mockImplementation(() => '900fac89aaeb349c657a60354b2edc47ce56e1dc6c50580bbf815b2753a10014')
+  createEncryptionKey.mockImplementation(() => '900fac89aaeb349c657a60354b2edc47ce56e1dc6c50580bbf815b2753a10014')
+})
+
+afterEach(() => {
+  getProxyConfig.mockClear()
+  createClientPublicKey.mockClear()
+  createEncryptionKey.mockClear()
+})
+
 describe('Setup container behaviour', () => {
 
-  const exampleJsonConfig = 
-        {
-          "spdzApiRoot": "/spdzapi",
-          "spdzProxyList": [
-            {
-              "url": "http://spdzproxyhere:3001",
-              "publicKey": "0102030405060708010203040506070801020304050607080102030405060708" 
-            },
-            {
-              "url": "http://spdzproxythere:3002",
-              "publicKey": "a1b2c3d4e5a6b7c8010203040506070801020304050607080102030405060708" 
-            }
-          ]
-        }
-
   it('Checks state is set after getting /spdzProxyConfig', (done) => {
-    
-    getProxyConfig.mockImplementation(() => Promise.resolve(exampleJsonConfig))
-    createClientPublicKey.mockImplementation(() => '900fac89aaeb349c657a60354b2edc47ce56e1dc6c50580bbf815b2753a10014')
-    createEncryptionKey.mockImplementation(() => '900fac89aaeb349c657a60354b2edc47ce56e1dc6c50580bbf815b2753a10014')
 
     // Mount and retrieve nodes doesn't work for stateless components (Connection), 
     // so just render and then check state - not sure about this
@@ -64,8 +72,27 @@ describe('Setup container behaviour', () => {
         done.fail(err)
       }
     }, 500)
+  })
 
-    getProxyConfig.mockClear()
+  it('Passes properties through to wrapped component', () => {
+    
+    const ComponentShowProps = SetupContainer(
+      class Dummy extends React.Component {
+        render() {
+          return <div>
+            <div id='passthrough'>{this.props.passThrough}</div>
+            <div id='spdzProxyServerList'></div>
+            <div id='spdzApiRoot'>{this.props.spdzApiRoot}</div>
+            <div id='clientPublicKey'>{this.props.clientPublicKey}</div>
+          </div>
+        }
+      })
+
+    const tree = renderer.create(
+      <ComponentShowProps passThrough='hijomio'/>
+    ).toJSON()
+
+    expect(tree).toMatchSnapshot()
   })
 
 })

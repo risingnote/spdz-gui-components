@@ -1,6 +1,6 @@
 {
   "name": "spdz-gui-components",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A library of React components to support SPDZ demonstrator GUIs.",
   "private": true,
   "author": {
@@ -40,7 +40,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "scripts/build.sh",
-    "test": "jest"
+    "test": "./node_modules/.bin/jest"
   },
   "babel": {
     "presets": [

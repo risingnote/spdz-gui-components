@@ -28,7 +28,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
-function setupWrapper(MPCGui) {
+function setupWrapper(MPCGui, configEndpoint) {
   return function (_Component) {
     _inherits(SetupContainer, _Component);
 
@@ -69,7 +69,7 @@ function setupWrapper(MPCGui) {
       value: function componentDidMount() {
         var _this2 = this;
 
-        (0, _spdzGuiLib.getProxyConfig)().then(function (json) {
+        (0, _spdzGuiLib.getProxyConfig)(configEndpoint).then(function (json) {
           var spdzProxyList = _this2.initSpdzServerList(json.spdzProxyList);
           _this2.setState({ spdzApiRoot: json.spdzApiRoot });
           _this2.setState({ spdzProxyList: spdzProxyList });

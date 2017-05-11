@@ -7,7 +7,7 @@ import { List, Map } from 'immutable'
 
 import { getProxyConfig, createClientPublicKey, createEncryptionKey } from 'spdz-gui-lib'
 
-function setupWrapper(MPCGui) {
+function setupWrapper(MPCGui, configEndpoint) {
   return class SetupContainer extends Component {
     constructor (props) {
       super(props)
@@ -37,7 +37,7 @@ function setupWrapper(MPCGui) {
      * At startup get list of SPDZ proxies. Generate client key material.
      */
     componentDidMount() {
-      getProxyConfig()
+      getProxyConfig(configEndpoint)
         .then((json) => {
           const spdzProxyList = this.initSpdzServerList(json.spdzProxyList)
           this.setState({spdzApiRoot: json.spdzApiRoot})          
